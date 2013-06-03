@@ -1,0 +1,115 @@
+<element name="toot-wrap">
+  <template>
+    <style>
+      @host {
+        * {
+          display: block;
+          background: #ffffff;
+          border: 1px solid lightgray;
+          border-radius: 4px;
+          width: 325px;
+        }
+        *:hover {
+          background-color: #f3f3f3;
+        }
+      }
+      content::-webkit-distributed(img) {
+        border-radius: 3px;
+        margin: 10px;
+        float: left;
+      }
+      content::-webkit-distributed(toot-message) {
+        color: green;
+      }
+      content::-webkit-distributed(toot-handle) {
+        color: gray;
+        padding-left: 1.2em;
+        font-size: .7em;
+      }
+      content::-webkit-distributed(toot-time) {
+        color: gray;
+        padding-left: 2em;
+        font-size: .7em;
+        float: right;
+        padding-right: .5em;
+      }
+      content::-webkit-distributed(toot-handle:before) {
+        content: "@";
+      }
+      .toot-message-body {
+        width: 100%;
+      }
+      .button-container {
+        margin: 0 auto;
+        display: table;
+      }
+      button {
+        cursor : pointer;
+        border-style : solid;
+        border-width : 1px;
+        border-radius : 50px;
+        padding : 10px 18px;
+        box-shadow : 0 1px 4px rgba(0,0,0,.6);
+        font-size : 9.5pt;
+        font-weight : bold;
+        color : #fff;
+        text-shadow : 0 1px 3px rgba(0,0,0,.4);
+        font-family : sans-serif;
+        text-decoration : none;
+        border-color : #2989d8;
+        background: #2989d8;
+        background: -moz-linear-gradient(top, #2989d8 0%, #1e5799 100%);
+        background: -webkit-gradient(linear, left top, left bottom,
+          color-stop(0%,#2989d8), color-stop(100%,#1e5799));
+        background: -webkit-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+        background: -o-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+        background: -ms-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+        background: linear-gradient(top, #2989d8 0%,#1e5799 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(
+          startColorstr='#2989d8', endColorstr='#1e5799',GradientType=0 );
+      }
+
+    </style>
+    <div class="toot-body">
+      <content select="img"></content>
+      <content select="toot-name"></content>
+      <content select="toot-handle"></content>
+      <content select="toot-time"></content>
+      <div class="toot-message-body">
+        <!-- <content select="toot-message"></content> -->
+        <div class="button-container">
+          <button on-click="buttonClick">Smell!</button>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+  var template = this.querySelector('template');
+  Polymer.register(this, {
+    ready: function() {
+      console.log(this);
+      // this.webkitCreateShadowRoot().appendChild(template.content.cloneNode(true));
+    },
+    buttonClick: function(event) {
+      console.log("BUTTON CLICK");
+    }
+  });
+  </script>
+</element>
+
+<div class="hero-unit">
+  <h1>Tootr</h1>
+  <p>Current Smells</p>
+  <ul>
+      <toot-wrap ng-repeat="toot in toots">
+        <img src="{{toot.img}}" alt="{{toot.name}} Profile Picture">
+        <toot-handle>{{toot.handle}}</toot-handle>
+        <toot-name>{{toot.name}}</toot-name>
+        <toot-message>{{toot.message}}</toot-message>
+        <toot-time>{{toot.time}}</toot-time>
+      </toot-wrap>
+  </ul>
+</div>
+
+<script>
+</script>
